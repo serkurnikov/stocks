@@ -8,6 +8,7 @@ import (
 	"net/url"
 	"stocks/internal/alphavantageapi/cache"
 	"stocks/internal/alphavantageapi/cache/memory"
+	"strings"
 	"time"
 )
 
@@ -36,7 +37,7 @@ func getEncodedURL(params map[string]string) string {
 	q := url.Values{}
 	for k, v := range params {
 		if len(v) != 0 {
-			q.Add(k, v)
+			q.Add(strings.ToLower(k), v)
 		}
 	}
 	q.Add("apikey", apiKey)
