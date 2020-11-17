@@ -10,8 +10,9 @@ services:
     ports:
       - 5432:5432
     environment:
-      POSTGRES_DB: converter
+      POSTGRES_DB: stocks
       POSTGRES_USER: root
       POSTGRES_PASSWORD: password
+      POSTGRES_HOST_AUTH_METHOD: trust
     volumes:
       - state-db:/var/lib/postgresql/data

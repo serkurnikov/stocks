@@ -14,7 +14,7 @@ import (
 
 func connectDB() (*sqlx.DB, error) {
 	dbDsnString := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
-		"localhost", 5432, "root", "password", "converter",
+		"localhost", 5432, "root", "password", "stocks",
 	)
 	dbConn, err := sqlx.Connect("postgres", dbDsnString)
 	if err != nil {
