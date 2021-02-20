@@ -37,8 +37,7 @@ func (s *service) runServe(ctxStartup, ctxShutdown Ctx, shutdown func()) (err er
 	go cryptoApi.UpdateCurrency()
 
 	repo := dal.New(db)
-	resourseData := dal.Init()
-	appl := app.NewAppl(repo, resourseData, cryptoApi)
+	appl := app.NewAppl(repo, cryptoApi)
 	s.srv, err = openapi.NewServer(appl)
 	if err != nil {
 		return log.Err("failed to openapi.NewServer", "err", err)

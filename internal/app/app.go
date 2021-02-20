@@ -20,13 +20,8 @@ type (
 		AddPriceCurrency(_ Ctx, name string) (id int, err error)
 	}
 
-	ResourseData interface {
-		GetDataFromYamlResource() (params *cryptocompareapi.CurrencyParams)
-	}
-
 	App struct {
 		repo         Repo
-		resourseData ResourseData
 		alphaApi     cryptocompareapi.Api
 	}
 )
@@ -38,10 +33,9 @@ type (
 	}
 )
 
-func NewAppl(repo Repo, resourseData ResourseData, api cryptocompareapi.Api) Appl {
+func NewAppl(repo Repo, api cryptocompareapi.Api) Appl {
 	return &App{
 		repo:         repo,
-		resourseData: resourseData,
 		alphaApi:     api,
 	}
 }

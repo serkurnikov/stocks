@@ -16,7 +16,7 @@ import (
 const (
 	cachedTime  = 5 * time.Minute
 	clearedTime = 30 * time.Minute
-	timeUpdate  = 15 * time.Second
+	timeUpdate  = 1 * time.Second
 	baseURL     = "https://min-api.cryptocompare.com/data/pricemultifull?"
 )
 
@@ -82,6 +82,7 @@ func (c *api) GetCurrencyPrice(params CurrencyParams) (*gabs.Container, error) {
 			for key, child := range jsonParsed.Path(rawPath).ChildrenMap() {
 				if isExist(key) {
 					outPut.SetP(fmt.Sprintf("%v", child.Data().(interface{})), rawPath+splitPoint+key)
+					println("Start")
 				}
 			}
 
@@ -123,13 +124,12 @@ func NewCryptoCompare() Api {
 }
 
 func (c *api) UpdateCurrency() {
-
 	ticker := time.NewTicker(timeUpdate)
 	quit := make(chan struct{})
 	for {
 		select {
 		case <-ticker.C:
-			//c.GetCurrencyPrice(*c.resourseData.GetDataFromYamlResource())
+			c.GetCurrencyPrice(*GetDataFromYamlResource())
 		case <-quit:
 			ticker.Stop()
 			return
