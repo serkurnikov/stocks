@@ -1,7 +1,7 @@
 -- +goose Up
 CREATE SCHEMA IF NOT EXISTS public;
 
-CREATE TABLE IF NOT EXISTS histories
+CREATE TABLE IF NOT EXISTS pricies
 (
     id SERIAL primary key,
     value double precision default 0.0,

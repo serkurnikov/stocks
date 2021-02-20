@@ -5,27 +5,43 @@ package app
 
 import (
 	"context"
-	"stocks/internal/alphavantageapi"
+	"github.com/Jeffail/gabs/v2"
+	"stocks/internal/cryptocompareapi"
 )
 
 type (
 	Ctx = context.Context
 
-	Appl interface{
-		GetTimeSeriesIntraday(ctx Ctx, params alphavantageapi.TimeSeriesIntradayParams) (*alphavantageapi.TimeSeriesIntraday, error)
+	Appl interface {
+		GetCurrencyPrice(ctx Ctx, params cryptocompareapi.CurrencyParams) (*gabs.Container, error)
 	}
 
-	Repo interface{}
+	Repo interface {
+		AddPriceCurrency(_ Ctx, name string) (id int, err error)
+	}
+
+	ResourseData interface {
+		GetDataFromYamlResource() (params *cryptocompareapi.CurrencyParams)
+	}
 
 	App struct {
-		repo     Repo
-		alphaApi alphavantageapi.Api
+		repo         Repo
+		resourseData ResourseData
+		alphaApi     cryptocompareapi.Api
 	}
 )
 
-func NewAppl(repo Repo, api alphavantageapi.Api) Appl {
+type (
+	PriceCurrency struct {
+		ID   int
+		Name string
+	}
+)
+
+func NewAppl(repo Repo, resourseData ResourseData, api cryptocompareapi.Api) Appl {
 	return &App{
-		repo:     repo,
-		alphaApi: api,
+		repo:         repo,
+		resourseData: resourseData,
+		alphaApi:     api,
 	}
 }

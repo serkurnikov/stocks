@@ -42,8 +42,8 @@ func NewStockAPI(spec *loads.Document) *StockAPI {
 
 		JSONProducer: runtime.JSONProducer(),
 
-		TimeSeriesIntradayHandler: TimeSeriesIntradayHandlerFunc(func(params TimeSeriesIntradayParams) TimeSeriesIntradayResponder {
-			return TimeSeriesIntradayNotImplemented()
+		PriceHandler: PriceHandlerFunc(func(params PriceParams) PriceResponder {
+			return PriceNotImplemented()
 		}),
 	}
 }
@@ -83,8 +83,8 @@ type StockAPI struct {
 	//   - application/json
 	JSONProducer runtime.Producer
 
-	// TimeSeriesIntradayHandler sets the operation handler for the time series intraday operation
-	TimeSeriesIntradayHandler TimeSeriesIntradayHandler
+	// PriceHandler sets the operation handler for the price operation
+	PriceHandler PriceHandler
 	// ServeError is called when an error is received, there is a default handler
 	// but you can set your own with this
 	ServeError func(http.ResponseWriter, *http.Request, error)
@@ -161,8 +161,8 @@ func (o *StockAPI) Validate() error {
 		unregistered = append(unregistered, "JSONProducer")
 	}
 
-	if o.TimeSeriesIntradayHandler == nil {
-		unregistered = append(unregistered, "TimeSeriesIntradayHandler")
+	if o.PriceHandler == nil {
+		unregistered = append(unregistered, "PriceHandler")
 	}
 
 	if len(unregistered) > 0 {
@@ -255,7 +255,7 @@ func (o *StockAPI) initHandlerCache() {
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
-	o.handlers["GET"]["/getTimeSeriesIntraday"] = NewTimeSeriesIntraday(o.context, o.TimeSeriesIntradayHandler)
+	o.handlers["GET"]["/price"] = NewPrice(o.context, o.PriceHandler)
 }
 
 // Serve creates a http handler to serve the API over HTTP

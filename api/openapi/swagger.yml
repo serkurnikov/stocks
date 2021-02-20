@@ -35,20 +35,23 @@ consumes:
 produces:
   - application/json
 
+responses:
+  GenericError:
+    description: General errors using same model as used by go-swagger for validation errors.
+    schema:
+      $ref: '#/definitions/Error'
+
 paths:
-  /getTimeSeriesIntraday:
+  /price:
     get:
-      operationId: timeSeriesIntraday
-      description: TimeSeriesIntraday
+      operationId: Price
+      description: get Currency Price
       parameters:
         - in: query
-          name: function
+          name: fsyms
           type: string
         - in: query
-          name: symbol
-          type: string
-        - in: query
-          name: interval
+          name: tsyms
           type: string
       responses:
         '200':
@@ -60,5 +63,4 @@ paths:
             properties:
               result:
                 type: object
-        default:
-          $ref: '#/definitions/Error'
+        default: {$ref: '#/responses/GenericError'}

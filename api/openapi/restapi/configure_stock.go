@@ -12,6 +12,7 @@ import (
 	"stocks/api/openapi/restapi/op"
 )
 
+//go:generate swagger generate server --target ..\..\openapi --name Stock --spec C:\cygwin64\tmp\swagger.yml465156967 --api-package op --model-package model --principal interface{} --exclude-main --strict-responders
 
 func configureFlags(api *op.StockAPI) {
 	// api.CommandLineOptionsGroups = []swag.CommandLineOptionsGroup{ ... }
@@ -35,9 +36,9 @@ func configureAPI(api *op.StockAPI) http.Handler {
 
 	api.JSONProducer = runtime.JSONProducer()
 
-	if api.TimeSeriesIntradayHandler == nil {
-		api.TimeSeriesIntradayHandler = op.TimeSeriesIntradayHandlerFunc(func(params op.TimeSeriesIntradayParams) op.TimeSeriesIntradayResponder {
-			return op.TimeSeriesIntradayNotImplemented()
+	if api.PriceHandler == nil {
+		api.PriceHandler = op.PriceHandlerFunc(func(params op.PriceParams) op.PriceResponder {
+			return op.PriceNotImplemented()
 		})
 	}
 

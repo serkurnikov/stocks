@@ -3,20 +3,16 @@ package openapi
 import (
 	"github.com/go-openapi/swag"
 	"stocks/api/openapi/restapi/op"
-	"stocks/internal/alphavantageapi"
+	"stocks/internal/cryptocompareapi"
 )
 
-func (srv *server) TimeSeriesIntradayHandlerFunc(params op.TimeSeriesIntradayParams) op.TimeSeriesIntradayResponder {
+func (srv *server) PriceHandlerFunc(params op.PriceParams) op.PriceResponder {
 	ctx, _ := fromRequest(params.HTTPRequest)
-	var prm  = alphavantageapi.TimeSeriesIntradayParams{
-		Function:   swag.StringValue(params.Function),
-		Symbol:     swag.StringValue(params.Symbol),
-		Interval:   swag.StringValue(params.Interval),
-		Adjusted:   "",
-		Outputsize: "",
-		Datatype:   "",
+	var prm = cryptocompareapi.CurrencyParams{
+		Fsyms: swag.StringValue(params.Fsyms),
+		Tsyms: swag.StringValue(params.Tsyms),
 	}
 
-	result, _ := srv.app.GetTimeSeriesIntraday(ctx, prm)
-	return op.NewTimeSeriesIntradayOK().WithPayload(&op.TimeSeriesIntradayOKBody{Result: result})
+	result, _ := srv.app.GetCurrencyPrice(ctx, prm)
+	return op.NewPriceOK().WithPayload(&op.PriceOKBody{Result: result})
 }

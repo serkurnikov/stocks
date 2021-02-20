@@ -2,7 +2,6 @@ package dal
 
 import (
 	"context"
-
 	"stocks/internal/app"
 
 	"github.com/jmoiron/sqlx"
@@ -10,10 +9,14 @@ import (
 
 type Ctx = context.Context
 
-type repo struct {
+type Repo struct {
 	db *sqlx.DB
 }
 
 func New(db *sqlx.DB) app.Repo {
-	return &repo{db: db}
+	return &Repo{db: db}
+}
+
+func (r Repo) AddPriceCurrency(_ app.Ctx, name string) (id int, err error) {
+	panic("implement me")
 }

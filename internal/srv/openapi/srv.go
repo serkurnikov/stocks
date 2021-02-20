@@ -51,7 +51,7 @@ func NewServer(appl app.Appl) (*restapi.Server, error) {
 	api := op.NewStockAPI(swaggerSpec)
 	api.Logger = structlog.New(structlog.KeyUnit, "swagger").Printf
 
-	api.TimeSeriesIntradayHandler = op.TimeSeriesIntradayHandlerFunc(srv.TimeSeriesIntradayHandlerFunc)
+	api.PriceHandler = op.PriceHandlerFunc(srv.PriceHandlerFunc)
 
 	server := restapi.NewServer(api)
 	server.Host = "localhost"

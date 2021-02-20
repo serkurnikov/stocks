@@ -4,9 +4,9 @@ import (
 	"context"
 	"github.com/powerman/structlog"
 	"stocks/api/openapi/restapi"
-	"stocks/internal/alphavantageapi"
 	"stocks/internal/app"
 	"stocks/internal/config"
+	"stocks/internal/cryptocompareapi"
 	"stocks/internal/dal"
 	"stocks/internal/srv/openapi"
 	"stocks/pkg/concurrent"
@@ -33,9 +33,12 @@ func (s *service) runServe(ctxStartup, ctxShutdown Ctx, shutdown func()) (err er
 		return log.Err("err", err)
 	}
 
-	alphaApi := alphavantageapi.NewAlphaVantage()
+	cryptoApi := cryptocompareapi.NewCryptoCompare()
+	go cryptoApi.UpdateCurrency()
+
 	repo := dal.New(db)
-	appl := app.NewAppl(repo, alphaApi)
+	resourseData := dal.Init()
+	appl := app.NewAppl(repo, resourseData, cryptoApi)
 	s.srv, err = openapi.NewServer(appl)
 	if err != nil {
 		return log.Err("failed to openapi.NewServer", "err", err)

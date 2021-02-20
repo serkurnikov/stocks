@@ -35,24 +35,19 @@ func init() {
   },
   "basePath": "/",
   "paths": {
-    "/getTimeSeriesIntraday": {
+    "/price": {
       "get": {
-        "description": "TimeSeriesIntraday",
-        "operationId": "timeSeriesIntraday",
+        "description": "get Currency Price",
+        "operationId": "Price",
         "parameters": [
           {
             "type": "string",
-            "name": "function",
+            "name": "fsyms",
             "in": "query"
           },
           {
             "type": "string",
-            "name": "symbol",
-            "in": "query"
-          },
-          {
-            "type": "string",
-            "name": "interval",
+            "name": "tsyms",
             "in": "query"
           }
         ],
@@ -72,7 +67,7 @@ func init() {
             }
           },
           "default": {
-            "$ref": "#/definitions/Error"
+            "$ref": "#/responses/GenericError"
           }
         }
       }
@@ -96,6 +91,14 @@ func init() {
           "type": "string",
           "x-order": 1
         }
+      }
+    }
+  },
+  "responses": {
+    "GenericError": {
+      "description": "General errors using same model as used by go-swagger for validation errors.",
+      "schema": {
+        "$ref": "#/definitions/Error"
       }
     }
   }
@@ -118,24 +121,19 @@ func init() {
   },
   "basePath": "/",
   "paths": {
-    "/getTimeSeriesIntraday": {
+    "/price": {
       "get": {
-        "description": "TimeSeriesIntraday",
-        "operationId": "timeSeriesIntraday",
+        "description": "get Currency Price",
+        "operationId": "Price",
         "parameters": [
           {
             "type": "string",
-            "name": "function",
+            "name": "fsyms",
             "in": "query"
           },
           {
             "type": "string",
-            "name": "symbol",
-            "in": "query"
-          },
-          {
-            "type": "string",
-            "name": "interval",
+            "name": "tsyms",
             "in": "query"
           }
         ],
@@ -154,7 +152,12 @@ func init() {
               }
             }
           },
-          "default": {}
+          "default": {
+            "description": "General errors using same model as used by go-swagger for validation errors.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
         }
       }
     }
@@ -177,6 +180,14 @@ func init() {
           "type": "string",
           "x-order": 1
         }
+      }
+    }
+  },
+  "responses": {
+    "GenericError": {
+      "description": "General errors using same model as used by go-swagger for validation errors.",
+      "schema": {
+        "$ref": "#/definitions/Error"
       }
     }
   }
