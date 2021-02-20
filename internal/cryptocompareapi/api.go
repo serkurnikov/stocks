@@ -9,7 +9,6 @@ import (
 	"net/url"
 	"stocks/internal/cryptocompareapi/cache"
 	"stocks/internal/cryptocompareapi/cache/memory"
-	"stocks/internal/dal"
 	"strings"
 	"time"
 )
@@ -29,8 +28,6 @@ type Api interface {
 type api struct {
 	client       *http.Client
 	storage      cache.Storage
-	repo         *dal.Repo
-	resourseData *dal.ResourseData
 }
 
 func getEncodedURL(params map[string]string) string {
@@ -126,12 +123,13 @@ func NewCryptoCompare() Api {
 }
 
 func (c *api) UpdateCurrency() {
+
 	ticker := time.NewTicker(timeUpdate)
 	quit := make(chan struct{})
 	for {
 		select {
 		case <-ticker.C:
-			c.GetCurrencyPrice(*c.resourseData.GetDataFromYamlResource())
+			//c.GetCurrencyPrice(*c.resourseData.GetDataFromYamlResource())
 		case <-quit:
 			ticker.Stop()
 			return

@@ -16,8 +16,7 @@ const (
 type ResourseData struct {}
 
 func Init() app.ResourseData {
-	return &ResourseData{
-	}
+	return &ResourseData{}
 }
 
 func (r ResourseData) GetDataFromYamlResource() (params *cryptocompareapi.CurrencyParams) {
