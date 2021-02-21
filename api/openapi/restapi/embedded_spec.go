@@ -74,6 +74,92 @@ func init() {
     }
   },
   "definitions": {
+    "CurrencyData": {
+      "type": "object",
+      "required": [
+        "key"
+      ],
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CurrencyObject"
+          },
+          "x-order": 1
+        },
+        "key": {
+          "type": "string",
+          "x-order": 0
+        }
+      }
+    },
+    "CurrencyObject": {
+      "type": "object",
+      "required": [
+        "key"
+      ],
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CurrencyValues"
+          },
+          "x-order": 1
+        },
+        "key": {
+          "type": "string",
+          "x-order": 0
+        }
+      }
+    },
+    "CurrencyValues": {
+      "type": "object",
+      "required": [
+        "PRICE"
+      ],
+      "properties": {
+        "CHANGE24HOUR": {
+          "type": "string",
+          "x-order": 0
+        },
+        "CHANGEPCT24HOUR": {
+          "type": "string",
+          "x-order": 1
+        },
+        "HIGH24HOUR": {
+          "type": "string",
+          "x-order": 6
+        },
+        "LOW24HOUR": {
+          "type": "string",
+          "x-order": 5
+        },
+        "MKTCAP": {
+          "type": "string",
+          "x-order": 9
+        },
+        "OPEN24HOUR": {
+          "type": "string",
+          "x-order": 2
+        },
+        "PRICE": {
+          "type": "string",
+          "x-order": 7
+        },
+        "SUPPLY": {
+          "type": "string",
+          "x-order": 8
+        },
+        "VOLUME24HOUR": {
+          "type": "string",
+          "x-order": 3
+        },
+        "VOLUME24HOURTO": {
+          "type": "string",
+          "x-order": 4
+        }
+      }
+    },
     "Error": {
       "type": "object",
       "required": [
@@ -90,6 +176,25 @@ func init() {
         "message": {
           "type": "string",
           "x-order": 1
+        }
+      }
+    },
+    "ResultCurrency": {
+      "type": "object",
+      "required": [
+        "key"
+      ],
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CurrencyData"
+          },
+          "x-order": 1
+        },
+        "key": {
+          "type": "string",
+          "x-order": 0
         }
       }
     }
@@ -163,6 +268,92 @@ func init() {
     }
   },
   "definitions": {
+    "CurrencyData": {
+      "type": "object",
+      "required": [
+        "key"
+      ],
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CurrencyObject"
+          },
+          "x-order": 1
+        },
+        "key": {
+          "type": "string",
+          "x-order": 0
+        }
+      }
+    },
+    "CurrencyObject": {
+      "type": "object",
+      "required": [
+        "key"
+      ],
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CurrencyValues"
+          },
+          "x-order": 1
+        },
+        "key": {
+          "type": "string",
+          "x-order": 0
+        }
+      }
+    },
+    "CurrencyValues": {
+      "type": "object",
+      "required": [
+        "PRICE"
+      ],
+      "properties": {
+        "CHANGE24HOUR": {
+          "type": "string",
+          "x-order": 0
+        },
+        "CHANGEPCT24HOUR": {
+          "type": "string",
+          "x-order": 1
+        },
+        "HIGH24HOUR": {
+          "type": "string",
+          "x-order": 6
+        },
+        "LOW24HOUR": {
+          "type": "string",
+          "x-order": 5
+        },
+        "MKTCAP": {
+          "type": "string",
+          "x-order": 9
+        },
+        "OPEN24HOUR": {
+          "type": "string",
+          "x-order": 2
+        },
+        "PRICE": {
+          "type": "string",
+          "x-order": 7
+        },
+        "SUPPLY": {
+          "type": "string",
+          "x-order": 8
+        },
+        "VOLUME24HOUR": {
+          "type": "string",
+          "x-order": 3
+        },
+        "VOLUME24HOURTO": {
+          "type": "string",
+          "x-order": 4
+        }
+      }
+    },
     "Error": {
       "type": "object",
       "required": [
@@ -179,6 +370,25 @@ func init() {
         "message": {
           "type": "string",
           "x-order": 1
+        }
+      }
+    },
+    "ResultCurrency": {
+      "type": "object",
+      "required": [
+        "key"
+      ],
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CurrencyData"
+          },
+          "x-order": 1
+        },
+        "key": {
+          "type": "string",
+          "x-order": 0
         }
       }
     }

@@ -18,8 +18,9 @@ require (
 	github.com/go-openapi/swag v0.19.14
 	github.com/go-openapi/validate v0.20.2
 	github.com/go-sql-driver/mysql v1.5.0
+	github.com/go-swagger/go-swagger v0.26.1 // indirect
 	github.com/go-toolsmith/pkgload v1.0.1 // indirect
-	github.com/golangci/golangci-lint v1.37.0 // indirect
+	github.com/golangci/golangci-lint v1.37.1 // indirect
 	github.com/golangci/misspell v0.3.5 // indirect
 	github.com/google/uuid v1.2.0 // indirect
 	github.com/gopherjs/gopherjs v0.0.0-20210202160940-bed99a852dfe // indirect
@@ -27,7 +28,7 @@ require (
 	github.com/jessevdk/go-flags v1.4.0
 	github.com/jirfag/go-printf-func-name v0.0.0-20200119135958-7558a9eaa5af // indirect
 	github.com/jmoiron/sqlx v1.3.1
-	github.com/kardianos/osext v0.0.0-20190222173326-2bc1f35cddc0
+	github.com/kardianos/osext v0.0.0-20190222173326-2bc1f35cddc0 // indirect
 	github.com/lib/pq v1.9.0
 	github.com/magefile/mage v1.11.0 // indirect
 	github.com/magiconair/properties v1.8.4 // indirect

@@ -30,6 +30,68 @@ definitions:
       message:
         type: string
 
+  CurrencyValues:
+    type: object
+    required:
+      - PRICE
+    properties:
+      CHANGE24HOUR:
+        type: string
+      CHANGEPCT24HOUR:
+        type: string
+      OPEN24HOUR:
+        type: string
+      VOLUME24HOUR:
+        type: string
+      VOLUME24HOURTO:
+        type: string
+      LOW24HOUR:
+        type: string
+      HIGH24HOUR:
+        type: string
+      PRICE:
+        type: string
+      SUPPLY:
+        type: string
+      MKTCAP:
+        type: string
+
+  CurrencyObject:
+    type: object
+    required:
+      - key
+    properties:
+      key:
+        type: string
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/CurrencyValues'
+
+  CurrencyData:
+    type: object
+    required:
+      - key
+    properties:
+      key:
+        type: string
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/CurrencyObject'
+
+  ResultCurrency:
+    type: object
+    required:
+      - key
+    properties:
+      key:
+        type: string
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/CurrencyData'
+
 consumes:
   - application/json
 produces:

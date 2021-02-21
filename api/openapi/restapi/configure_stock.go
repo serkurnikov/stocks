@@ -12,7 +12,7 @@ import (
 	"stocks/api/openapi/restapi/op"
 )
 
-//go:generate swagger generate server --target ..\..\openapi --name Stock --spec C:\cygwin64\tmp\swagger.yml465156967 --api-package op --model-package model --principal interface{} --exclude-main --strict-responders
+//go:generate swagger generate server --target ..\..\openapi --name Stock --spec ..\..\..\..\..\..\..\..\..\cygwin64\tmp\swagger.yml606021299 --api-package op --model-package model --principal interface{} --exclude-main --strict-responders
 
 func configureFlags(api *op.StockAPI) {
 	// api.CommandLineOptionsGroups = []swag.CommandLineOptionsGroup{ ... }

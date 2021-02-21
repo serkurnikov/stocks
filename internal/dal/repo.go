@@ -17,6 +17,6 @@ func New(db *sqlx.DB) app.Repo {
 	return &Repo{db: db}
 }
 
-func (r Repo) AddPriceCurrency(_ app.Ctx, name string) (id int, err error) {
+func (r Repo) SavePriceCurrency(_ app.Ctx, name string) (id int, err error) {
 	panic("implement me")
 }

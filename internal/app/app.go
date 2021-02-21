@@ -13,29 +13,35 @@ type (
 	Ctx = context.Context
 
 	Appl interface {
-		GetCurrencyPrice(ctx Ctx, params cryptocompareapi.CurrencyParams) (*gabs.Container, error)
+		GetCurrencyPrice(ctx Ctx, params *cryptocompareapi.CurrencyParams) (*gabs.Container, error)
 	}
 
 	Repo interface {
-		AddPriceCurrency(_ Ctx, name string) (id int, err error)
+		SavePriceCurrency(_ Ctx, name string) (id int, err error)
+	}
+
+	ResourseData interface {
+		GetCurrencyParamsFromYaml(_ Ctx) (params *cryptocompareapi.CurrencyParams)
 	}
 
 	App struct {
 		repo         Repo
+		resourseData ResourseData
 		alphaApi     cryptocompareapi.Api
 	}
 )
 
 type (
-	PriceCurrency struct {
+	Currency struct {
 		ID   int
 		Name string
 	}
 )
 
-func NewAppl(repo Repo, api cryptocompareapi.Api) Appl {
+func NewAppl(repo Repo, resourseData ResourseData, api cryptocompareapi.Api) Appl {
 	return &App{
-		repo:         repo,
-		alphaApi:     api,
+		repo:     repo,
+		resourseData: resourseData,
+		alphaApi: api,
 	}
 }

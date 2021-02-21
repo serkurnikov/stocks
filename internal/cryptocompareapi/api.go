@@ -21,7 +21,7 @@ const (
 )
 
 type Api interface {
-	GetCurrencyPrice(params CurrencyParams) (*gabs.Container, error)
+	GetCurrencyPrice(params *CurrencyParams) (*gabs.Container, error)
 	UpdateCurrency()
 }
 
@@ -64,7 +64,7 @@ func (c *api) req(params map[string]string) ([]byte, error) {
 	return body, nil
 }
 
-func (c *api) GetCurrencyPrice(params CurrencyParams) (*gabs.Container, error) {
+func (c *api) GetCurrencyPrice(params *CurrencyParams) (*gabs.Container, error) {
 	fsyms := strings.Split(params.Fsyms, splitS)
 	tsyms := strings.Split(params.Tsyms, splitS)
 
@@ -129,7 +129,7 @@ func (c *api) UpdateCurrency() {
 	for {
 		select {
 		case <-ticker.C:
-			c.GetCurrencyPrice(*GetDataFromYamlResource())
+			//c.GetCurrencyPrice(*dal.ResourseData.GetDataFromYamlResource())
 		case <-quit:
 			ticker.Stop()
 			return
