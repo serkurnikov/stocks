@@ -16,7 +16,7 @@ import (
 const (
 	cachedTime  = 5 * time.Minute
 	clearedTime = 30 * time.Minute
-	timeUpdate  = 1 * time.Second
+	timeUpdate  = 15 * time.Second
 	baseURL     = "https://min-api.cryptocompare.com/data/pricemultifull?"
 )
 
@@ -65,6 +65,9 @@ func (c *api) req(params map[string]string) ([]byte, error) {
 }
 
 func (c *api) GetCurrencyPrice(params *CurrencyParams) (*gabs.Container, error) {
+	//Save params into cash
+	c.storage.Set(cache.CURRENCY_PARAMS, params, 0)
+
 	fsyms := strings.Split(params.Fsyms, splitS)
 	tsyms := strings.Split(params.Tsyms, splitS)
 
@@ -82,7 +85,6 @@ func (c *api) GetCurrencyPrice(params *CurrencyParams) (*gabs.Container, error) 
 			for key, child := range jsonParsed.Path(rawPath).ChildrenMap() {
 				if isExist(key) {
 					outPut.SetP(fmt.Sprintf("%v", child.Data().(interface{})), rawPath+splitPoint+key)
-					println("Start")
 				}
 			}
 
@@ -124,12 +126,15 @@ func NewCryptoCompare() Api {
 }
 
 func (c *api) UpdateCurrency() {
+	//Fetch params from cash
+	params, _ := c.storage.Get(cache.CURRENCY_PARAMS)
+
 	ticker := time.NewTicker(timeUpdate)
 	quit := make(chan struct{})
 	for {
 		select {
 		case <-ticker.C:
-			//c.GetCurrencyPrice(*dal.ResourseData.GetDataFromYamlResource())
+			c.GetCurrencyPrice(params.(*CurrencyParams))
 		case <-quit:
 			ticker.Stop()
 			return

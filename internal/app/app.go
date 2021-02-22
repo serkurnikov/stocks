@@ -13,11 +13,11 @@ type (
 	Ctx = context.Context
 
 	Appl interface {
-		GetCurrencyPrice(ctx Ctx, params *cryptocompareapi.CurrencyParams) (*gabs.Container, error)
+		GetCurrencyPrice(ctx Ctx) (*gabs.Container, error)
 	}
 
 	Repo interface {
-		SavePriceCurrency(_ Ctx, name string) (id int, err error)
+		SavePriceCurrency(ctx Ctx, container *gabs.Container) (id int, err error)
 	}
 
 	ResourseData interface {

@@ -13,12 +13,7 @@ import (
 
 // PriceURL generates an URL for the price operation
 type PriceURL struct {
-	Fsyms *string
-	Tsyms *string
-
 	_basePath string
-	// avoid unkeyed usage
-	_ struct{}
 }
 
 // WithBasePath sets the base path for this url builder, only required when it's different from the
@@ -47,26 +42,6 @@ func (o *PriceURL) Build() (*url.URL, error) {
 		_basePath = "/"
 	}
 	_result.Path = golangswaggerpaths.Join(_basePath, _path)
-
-	qs := make(url.Values)
-
-	var fsymsQ string
-	if o.Fsyms != nil {
-		fsymsQ = *o.Fsyms
-	}
-	if fsymsQ != "" {
-		qs.Set("fsyms", fsymsQ)
-	}
-
-	var tsymsQ string
-	if o.Tsyms != nil {
-		tsymsQ = *o.Tsyms
-	}
-	if tsymsQ != "" {
-		qs.Set("tsyms", tsymsQ)
-	}
-
-	_result.RawQuery = qs.Encode()
 
 	return &_result, nil
 }

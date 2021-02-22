@@ -108,13 +108,6 @@ paths:
     get:
       operationId: Price
       description: get Currency Price
-      parameters:
-        - in: query
-          name: fsyms
-          type: string
-        - in: query
-          name: tsyms
-          type: string
       responses:
         '200':
           description: response

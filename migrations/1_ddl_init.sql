@@ -1,11 +1,12 @@
 -- +goose Up
+
 CREATE SCHEMA IF NOT EXISTS public;
 
-CREATE TABLE IF NOT EXISTS pricies
+CREATE TABLE IF NOT EXISTS public.result_currenies
 (
-    id SERIAL primary key,
-    value double precision default 0.0,
-    created_at time with time zone default now()
+    result_currency_id      SERIAL PRIMARY KEY,
+    result_currency_raw     jsonb,
+    result_currency_display jsonb
 );
 
 -- +goose Down

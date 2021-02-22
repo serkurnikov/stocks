@@ -9,9 +9,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/errors"
-	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
-	"github.com/go-openapi/strfmt"
 )
 
 // NewPriceParams creates a new PriceParams object
@@ -29,15 +27,6 @@ type PriceParams struct {
 
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*
-	  In: query
-	*/
-	Fsyms *string
-	/*
-	  In: query
-	*/
-	Tsyms *string
 }
 
 // BindRequest both binds and validates a request, it assumes that complex things implement a Validatable(strfmt.Registry) error interface
@@ -49,56 +38,8 @@ func (o *PriceParams) BindRequest(r *http.Request, route *middleware.MatchedRout
 
 	o.HTTPRequest = r
 
-	qs := runtime.Values(r.URL.Query())
-
-	qFsyms, qhkFsyms, _ := qs.GetOK("fsyms")
-	if err := o.bindFsyms(qFsyms, qhkFsyms, route.Formats); err != nil {
-		res = append(res, err)
-	}
-
-	qTsyms, qhkTsyms, _ := qs.GetOK("tsyms")
-	if err := o.bindTsyms(qTsyms, qhkTsyms, route.Formats); err != nil {
-		res = append(res, err)
-	}
-
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-// bindFsyms binds and validates parameter Fsyms from query.
-func (o *PriceParams) bindFsyms(rawData []string, hasKey bool, formats strfmt.Registry) error {
-	var raw string
-	if len(rawData) > 0 {
-		raw = rawData[len(rawData)-1]
-	}
-
-	// Required: false
-	// AllowEmptyValue: false
-	if raw == "" { // empty values pass all other validations
-		return nil
-	}
-
-	o.Fsyms = &raw
-
-	return nil
-}
-
-// bindTsyms binds and validates parameter Tsyms from query.
-func (o *PriceParams) bindTsyms(rawData []string, hasKey bool, formats strfmt.Registry) error {
-	var raw string
-	if len(rawData) > 0 {
-		raw = rawData[len(rawData)-1]
-	}
-
-	// Required: false
-	// AllowEmptyValue: false
-	if raw == "" { // empty values pass all other validations
-		return nil
-	}
-
-	o.Tsyms = &raw
-
 	return nil
 }

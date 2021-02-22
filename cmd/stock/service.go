@@ -8,6 +8,7 @@ import (
 	"stocks/internal/config"
 	"stocks/internal/cryptocompareapi"
 	"stocks/internal/dal"
+	"stocks/internal/rsd"
 	"stocks/internal/srv/openapi"
 	"stocks/pkg/concurrent"
 	"stocks/pkg/serve"
@@ -34,10 +35,10 @@ func (s *service) runServe(ctxStartup, ctxShutdown Ctx, shutdown func()) (err er
 	}
 
 	cryptoApi := cryptocompareapi.NewCryptoCompare()
-	go cryptoApi.UpdateCurrency()
+	//go cryptoApi.UpdateCurrency()
 
 	repo := dal.New(db)
-	resourseData := dal.Init()
+	resourseData := rsd.Init()
 	appl := app.NewAppl(repo, resourseData, cryptoApi)
 	s.srv, err = openapi.NewServer(appl)
 	if err != nil {

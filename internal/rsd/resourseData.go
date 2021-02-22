@@ -1,4 +1,4 @@
-package dal
+package rsd
 
 import (
 	"gopkg.in/yaml.v2"
@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	filePath = "/internal/dal/resourse_files/settings.yaml"
+	filePath = "/internal/rsd/resourse_files/settings.yaml"
 )
 
 type ResourseData struct {

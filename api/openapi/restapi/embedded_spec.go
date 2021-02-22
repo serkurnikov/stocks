@@ -39,18 +39,6 @@ func init() {
       "get": {
         "description": "get Currency Price",
         "operationId": "Price",
-        "parameters": [
-          {
-            "type": "string",
-            "name": "fsyms",
-            "in": "query"
-          },
-          {
-            "type": "string",
-            "name": "tsyms",
-            "in": "query"
-          }
-        ],
         "responses": {
           "200": {
             "description": "response",
@@ -230,18 +218,6 @@ func init() {
       "get": {
         "description": "get Currency Price",
         "operationId": "Price",
-        "parameters": [
-          {
-            "type": "string",
-            "name": "fsyms",
-            "in": "query"
-          },
-          {
-            "type": "string",
-            "name": "tsyms",
-            "in": "query"
-          }
-        ],
         "responses": {
           "200": {
             "description": "response",

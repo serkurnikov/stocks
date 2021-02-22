@@ -5,11 +5,14 @@ go 1.15
 require (
 	github.com/Djarvur/go-err113 v0.1.0 // indirect
 	github.com/Jeffail/gabs/v2 v2.6.0
+	github.com/acsellers/inflections v0.0.0-20141027155830-cb98bfe9e3ee // indirect
 	github.com/alexkohler/prealloc v1.0.0 // indirect
 	github.com/asaskevich/govalidator v0.0.0-20200907205600-7a23bdc65eef // indirect
 	github.com/bombsimon/wsl/v3 v3.2.0 // indirect
-	github.com/charithe/durationcheck v0.0.5 // indirect
+	github.com/charithe/durationcheck v0.0.6 // indirect
 	github.com/cheekybits/genny v1.0.1-0.20200709201058-3e22f1a88ff2
+	github.com/drone/sqlgen v0.0.0-20150912223319-39ee509bb576 // indirect
+	github.com/go-gad/sal v1.3.0 // indirect
 	github.com/go-openapi/errors v0.20.0
 	github.com/go-openapi/loads v0.20.2
 	github.com/go-openapi/runtime v0.19.26
@@ -29,6 +32,9 @@ require (
 	github.com/jirfag/go-printf-func-name v0.0.0-20200119135958-7558a9eaa5af // indirect
 	github.com/jmoiron/sqlx v1.3.1
 	github.com/kardianos/osext v0.0.0-20190222173326-2bc1f35cddc0 // indirect
+	github.com/kr/pretty v0.2.1 // indirect
+	github.com/kulti/thelper v0.4.0 // indirect
+	github.com/kyleconroy/sqlxgen v0.0.0-20150707072633-032d8528332d // indirect
 	github.com/lib/pq v1.9.0
 	github.com/magefile/mage v1.11.0 // indirect
 	github.com/magiconair/properties v1.8.4 // indirect
@@ -56,10 +62,12 @@ require (
 	github.com/prometheus/client_golang v1.9.0
 	github.com/prometheus/common v0.17.0 // indirect
 	github.com/prometheus/procfs v0.6.0 // indirect
+	github.com/quasilyte/go-ruleguard v0.3.1 // indirect
 	github.com/quasilyte/regex/syntax v0.0.0-20200805063351-8f842688393c // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
 	github.com/rs/cors v1.7.0
 	github.com/sebest/xff v0.0.0-20210106013422-671bd2870b3a
+	github.com/sergi/go-diff v1.0.0 // indirect
 	github.com/sirupsen/logrus v1.8.0 // indirect
 	github.com/smartystreets/assertions v1.2.0 // indirect
 	github.com/spf13/afero v1.5.1 // indirect
@@ -68,6 +76,7 @@ require (
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
 	github.com/spf13/pflag v1.0.5
 	github.com/stretchr/objx v0.3.0 // indirect
+	github.com/stretchr/testify v1.7.0 // indirect
 	github.com/tdakkota/asciicheck v0.0.0-20200416200610-e657995f937b // indirect
 	github.com/tidwall/pretty v1.0.5 // indirect
 	github.com/timakin/bodyclose v0.0.0-20200424151742-cb6215831a94 // indirect
