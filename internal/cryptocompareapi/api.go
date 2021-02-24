@@ -1,6 +1,7 @@
 package cryptocompareapi
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/Jeffail/gabs/v2"
 	"io/ioutil"
@@ -9,14 +10,15 @@ import (
 	"net/url"
 	"stocks/internal/cryptocompareapi/cache"
 	"stocks/internal/cryptocompareapi/cache/memory"
+	"stocks/internal/dao"
 	"strings"
 	"time"
 )
 
 const (
 	cachedTime  = 5 * time.Minute
-	clearedTime = 30 * time.Minute
-	timeUpdate  = 15 * time.Second
+	clearedTime = 1 * time.Second
+	timeUpdate  = 2 * time.Second
 	baseURL     = "https://min-api.cryptocompare.com/data/pricemultifull?"
 )
 
@@ -26,8 +28,9 @@ type Api interface {
 }
 
 type api struct {
-	client       *http.Client
-	storage      cache.Storage
+	client         *http.Client
+	storage        cache.Storage
+	currencyParams *CurrencyParams
 }
 
 func getEncodedURL(params map[string]string) string {
@@ -65,8 +68,13 @@ func (c *api) req(params map[string]string) ([]byte, error) {
 }
 
 func (c *api) GetCurrencyPrice(params *CurrencyParams) (*gabs.Container, error) {
-	//Save params into cash
-	c.storage.Set(cache.CURRENCY_PARAMS, params, 0)
+	//Get Data from Cash
+	cacheData, exist := c.storage.Get(cache.CURRENCY_DATA)
+	jsonData, _ := json.Marshal(cacheData)
+
+	if exist {
+		return gabs.ParseJSON(jsonData)
+	}
 
 	fsyms := strings.Split(params.Fsyms, splitS)
 	tsyms := strings.Split(params.Tsyms, splitS)
@@ -96,14 +104,19 @@ func (c *api) GetCurrencyPrice(params *CurrencyParams) (*gabs.Container, error) 
 
 		}
 	}
+	println("Update Data", outPut.String())
 	return outPut, nil
 }
 
 func isExist(key string) bool {
-	return true
+	if key == dao.CurrencyValuesConstants[key] {
+		return true
+	} else {
+		return false
+	}
 }
 
-func NewCryptoCompare() Api {
+func NewCryptoCompare(params *CurrencyParams) Api {
 	defaultTransport := &http.Transport{
 		DialContext: (&net.Dialer{
 			Timeout:   30 * time.Second,
@@ -122,19 +135,19 @@ func NewCryptoCompare() Api {
 	return &api{
 		client:  client,
 		storage: memory.InitCash(cachedTime, clearedTime),
+		currencyParams: params,
 	}
 }
 
 func (c *api) UpdateCurrency() {
-	//Fetch params from cash
-	params, _ := c.storage.Get(cache.CURRENCY_PARAMS)
-
 	ticker := time.NewTicker(timeUpdate)
 	quit := make(chan struct{})
 	for {
 		select {
 		case <-ticker.C:
-			c.GetCurrencyPrice(params.(*CurrencyParams))
+			//Save Data to Cash
+			result, _ := c.GetCurrencyPrice(c.currencyParams)
+			c.storage.Set(cache.CURRENCY_DATA, result, clearedTime)
 		case <-quit:
 			ticker.Stop()
 			return

@@ -21,7 +21,7 @@ type (
 	}
 
 	ResourseData interface {
-		GetCurrencyParamsFromYaml(_ Ctx) (params *cryptocompareapi.CurrencyParams)
+		GetCurrencyParamsFromYaml() (params *cryptocompareapi.CurrencyParams)
 	}
 
 	App struct {

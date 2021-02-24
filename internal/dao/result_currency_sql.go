@@ -109,8 +109,8 @@ func UpdateResultCurrency(db *sqlx.DB, query string, v *ResultCurrency) error {
 const CreateResultCurrenyStmt = `
 CREATE TABLE IF NOT EXISTS result_currenies (
  result_currency_id      SERIAL PRIMARY KEY 
-,result_currency_raw     jsonb
-,result_currency_display jsonb
+,result_currency_raw     VARCHAR(512)
+,result_currency_display VARCHAR(512)
 );
 `
 

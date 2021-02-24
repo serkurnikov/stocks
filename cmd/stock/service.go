@@ -34,11 +34,12 @@ func (s *service) runServe(ctxStartup, ctxShutdown Ctx, shutdown func()) (err er
 		return log.Err("err", err)
 	}
 
-	cryptoApi := cryptocompareapi.NewCryptoCompare()
-	//go cryptoApi.UpdateCurrency()
-
 	repo := dal.New(db)
 	resourseData := rsd.Init()
+	currencyParams := resourseData.GetCurrencyParamsFromYaml()
+	cryptoApi := cryptocompareapi.NewCryptoCompare(currencyParams)
+	go cryptoApi.UpdateCurrency()
+
 	appl := app.NewAppl(repo, resourseData, cryptoApi)
 	s.srv, err = openapi.NewServer(appl)
 	if err != nil {

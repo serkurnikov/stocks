@@ -3,7 +3,7 @@ package cache
 import "time"
 
 const (
-	CURRENCY_PARAMS = "CURRENCY_PARAMS"
+	CURRENCY_DATA = "CURRENCY_DATA"
 )
 
 type Storage interface {

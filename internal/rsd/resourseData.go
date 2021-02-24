@@ -21,7 +21,7 @@ func Init() app.ResourseData {
 	return &ResourseData{}
 }
 
-func (r ResourseData) GetCurrencyParamsFromYaml(_ app.Ctx) (params *cryptocompareapi.CurrencyParams) {
+func (r ResourseData) GetCurrencyParamsFromYaml() (params *cryptocompareapi.CurrencyParams) {
 	currencyParams := cryptocompareapi.CurrencyParams{}
 
 	err := yaml.Unmarshal(readFile(filePath), &currencyParams)

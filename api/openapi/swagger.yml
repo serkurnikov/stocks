@@ -118,4 +118,4 @@ paths:
             properties:
               result:
                 type: object
-        default: {$ref: '#/responses/GenericError'}
+        default: { $ref: '#/responses/GenericError' }

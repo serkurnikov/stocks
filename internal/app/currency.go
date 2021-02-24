@@ -5,7 +5,7 @@ import (
 )
 
 func (a App) GetCurrencyPrice(ctx Ctx) (*gabs.Container, error) {
-	prm := a.resourseData.GetCurrencyParamsFromYaml(ctx)
+	prm := a.resourseData.GetCurrencyParamsFromYaml()
 	var result *gabs.Container
 	if prm != nil {
 		result, _ = a.alphaApi.GetCurrencyPrice(prm)
